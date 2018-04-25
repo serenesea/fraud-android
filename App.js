@@ -9,8 +9,12 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  NativeModules,
+  Alert
 } from 'react-native';
+
+const ToastExample = NativeModules.ToastExample
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -21,6 +25,14 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+  componentDidMount(){
+
+    ToastExample.getBlackbox(
+      (blackbox) => {
+        console.log(blackbox);
+      }
+    );
+  }
   render() {
     return (
       <View style={styles.container}>

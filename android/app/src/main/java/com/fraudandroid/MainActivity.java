@@ -9,6 +9,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.util.Log;
 
+import com.facebook.react.bridge.NativeModule;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.ReactContextBaseJavaModule;
+import com.facebook.react.bridge.ReactMethod;
+
 import com.iovation.mobile.android.FraudForceConfiguration;
 import com.iovation.mobile.android.FraudForceManager;
 
@@ -22,7 +28,10 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "fraudandroid";
     }
-public static String blackbox;
+
+    /**create global variable blackbox*/
+    public static String blackbox;
+
     /**
      * Called when the activity is first created.
      *
@@ -33,6 +42,8 @@ public static String blackbox;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /**initialize variable blackbox*/
         blackbox = FraudForceManager.getInstance().getBlackbox(getApplicationContext());
         Log.v("<<<<<<<<<<<<<<<my blackbox from onCreate()", blackbox);
 
@@ -47,8 +58,7 @@ public static String blackbox;
     private class PrintThread extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
-          //println(FraudForceManager.getInstance().getBlackbox(getApplicationContext()));
-          //  return FraudForceManager.getInstance().getBlackbox(getApplicationContext());
+
           Log.v("<<<<<<<<<<<<<<<my blackbox from class PrintThread method doInBackGround()", blackbox);
 
           return blackbox;
